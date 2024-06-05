@@ -119,6 +119,7 @@ public class SignalWorker {
             result.put("messagesCount", messageList.size());
             Log.d(TAG, "Will dispatch messages: " + result.toString());
             SystemDispatcher.dispatch(GOT_SIGNAL_MESSAGES, result);
+            repository.deleteAllMessagesHavingTimeStampLessThen(timeFrame-(60*1000));
 	});
        } else {
            repository.getAllMessageByThreadId(threadId,timeFrame).subscribe(it -> {
@@ -153,6 +154,7 @@ public class SignalWorker {
             result.put("messagesCount", messageList.size());
             Log.d(TAG, "Will dispatch messages: " + result.toString());
             SystemDispatcher.dispatch(GOT_SIGNAL_MESSAGES, result);
+            repository.deleteAllMessagesHavingTimeStampLessThen(timeFrame-(60*1000));
             });
 
           }
